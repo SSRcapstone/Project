@@ -1,0 +1,298 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #f4f4f4;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  flex: 1;
+  position: relative;
+  z-index: 2; /* Ensure the header is above the video */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  margin: 20px auto; /* Center the navbar horizontally */
+  width: calc(100% - 40px); /* Adjust width to account for margins */
+  max-width: 1200px; /* Set a maximum width */
+  position: absolute; /* Position the navbar over the video */
+  top: 20px; /* Adjust the top position */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3; /* Ensure the navbar is above the video */
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hamburger-menu {
+  font-size: 2rem;
+  cursor: pointer;
+  display: none; /* Hide by default */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a, .settings-button, .nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links a:hover, .settings-button:hover, .nav-link:hover {
+  color: #ff6f61;
+}
+
+.settings-container {
+  position: relative; /* Make this container the reference for the popup */
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  text-align: center;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1; /* Ensure the video is behind the navbar */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 2; /* Ensure the overlay is above the video but below the navbar */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3; /* Ensure the hero content is above the overlay */
+  padding: 20px;
+  animation: slideIn 2s ease-in-out;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-buttons {
+  margin-bottom: 30px;
+}
+
+.cta-button, .cta-secondary-button {
+  padding: 15px 30px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.cta-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.cta-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.cta-secondary-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cta-secondary-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 80%; /* Increase the width of the search bar */
+  margin: 0 auto;
+}
+
+.dropdown {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.search-button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.settings-popup {
+  position: absolute;
+  top: calc(100% + 10px); /* Position below the settings button with some space */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1); /* Match the navbar background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  padding: 15px;
+  border-radius: 15px; /* Match the navbar rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 200px; /* Make the popup wider */
+}
+
+.settings-popup label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  color: white; /* Match the navbar text color */
+}
+
+.settings-popup input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.popup-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: color 0.3s;
+}
+
+.popup-link:hover {
+  color: #ff6f61;
+}
+
+.App-footer {
+  padding: 20px;
+  background: linear-gradient(135deg, #1b263b, #415a77);
+  color: white;
+  text-align: center;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide the nav links by default */
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Match the navbar background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    padding: 20px;
+    border-radius: 15px; /* Match the navbar rounded corners */
+    position: absolute;
+    top: 60px; /* Position below the navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .hamburger-menu {
+    display: block; /* Show the hamburger menu */
+  }
+}
